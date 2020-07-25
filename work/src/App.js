@@ -1,34 +1,49 @@
 import React from "react";
-// __ добавил : __
-import User from './User';
+// __ я добавил : __
+// __ ПЕРЕНОШУ НИЖЕ API __
+// import User from './User';
+
+// __ я добавил : __
 import photoJessica from './Jessica.png';
 
-class App extends React.Component {
-  render() {
-    // return <User name="Jessica Doe" avatar="..." email="hello@jessica.com" />;
+// __ теперь загрузим "реальные" данные с помощью асинхронного запроса __
+//  __ load the "real" data using an asynchronous request _______________
 
-    return <User name="Jessica Doe" avatar={photoJessica} email="hello@jessica.com" />;
+import API from './utils/API';
+// __ переношу СЮДА! __
+import User from './User';
+
+class App extends React.Component {
+  // __ добавляем ПЕРЕД рендером __
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: true,
+      name: null,
+      avatar: null,
+      email: null
+    };
+  }
+
+
+  render() {
+    // __ добавляем ___
+    const { isLoading, name, avatar, email } = this.state;
+
+    // return <User name="Jessica Doe" avatar="..." email="hello@jessica.com" />;
+    return (
+      // <User name="Jessica Doe" avatar={photoJessica} email="hello@jessica.com" />;
+      <User isLoading={isLoading} name={name} avatar={avatar} email={email} />
+    );
+  }
+  // __ добавляем __
+  async componentDidMount() {
+    // Load async data.
+    // Update state with new data.
+    // Re-render our component.
   }
 }
 export default App;
 
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Привет! <code>src/App.js</code> Сохрани!
-//         </p>
-//         <a className="App-link" href="#" target="_blank">
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-// export default App;
